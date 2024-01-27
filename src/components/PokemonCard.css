@@ -1,0 +1,117 @@
+.card{
+    width: 100vw;
+    margin: 0;
+    text-align: center;
+    height: 100vh;
+    color: white;
+}
+.mis-favoritos{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-top: 30px;
+    padding-right: 30px;
+}
+.mis-favoritos-texto{
+    color: gainsboro;
+}
+.favoritos, .page{
+    font-size: 32px;
+    margin-left: 15px;
+}
+.page{
+    color: rgba(255, 255, 255, .1);
+    cursor: pointer;
+}
+.page:hover{
+    color: rgba(255, 255, 255, .5);
+}
+.pokemon-nombre{
+    text-align: left;
+    padding-left: 30px;
+    text-transform: capitalize;
+}
+.pokemon-imagen{
+    width: 70%;
+    text-align: center;
+}
+.pokemon-numero{
+    text-align: left;
+    padding-left: 30px;
+    padding-top: 20px;
+    color: gainsboro;
+}
+.pokemon-datos{
+    width: 70%;
+    background-color: white;
+    color: gray;
+    margin: auto;
+    margin-top: -50px;
+    padding: 60px 20px 20px ;
+    border-radius: 20px;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+}
+.dato11, .dato21, .dato31{
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+}
+.dato12, .dato22, .dato32, .dato4{
+    padding: 10px;
+}
+.dato11 {
+    grid-column: 1;
+    grid-row: 1;
+}
+.dato12 {
+    grid-column: 2;
+    grid-row: 1;
+}
+.dato21 {
+    grid-column: 3;
+    grid-row: 1;
+}
+.dato22 {
+    grid-column: 4;
+    grid-row: 1;
+}
+.dato31 {
+    grid-column: 1;
+    grid-row: 2;
+}
+.dato32 {
+    grid-column: 2;
+    grid-row: 2;
+}
+.dato4 {
+    grid-column: 3/ span 2;
+    grid-row: 2;
+    text-transform: capitalize;
+}
+.boton-yo-te-elijo{
+    background-color: black;
+    color: white;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 100%;
+    grid-column: 1 / span 4;
+    grid-row: 3;
+}
+.cardfire{
+    background-color: red;
+}
+.cardnormal{
+    background-color: grey;
+}
+.cardwater{
+    background-color: blue;
+}
+.cardbug{
+    background-color: brown;
+}
+.cardgrass{
+    background-color: green;
+}
