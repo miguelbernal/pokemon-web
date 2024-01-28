@@ -15,22 +15,24 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemonData, onToggleFavorite
   const { id, name, imageUrl, attack, defense, hp, type } = pokemonData;
   const cardType = `card${type}`;
 
-  function handleFavoritos(){
-    console.log('Faavoritos')
-  }
-
   function handleAnterior(){
-    console.log('Anterior')
+    window.scrollBy({
+      top: -window.innerHeight,
+      behavior: 'smooth'
+    })
   }
 
   function handleSiguiente(){
-    console.log('Siguiente')
+    window.scrollBy({
+      top: window.innerHeight,
+      behavior: 'smooth'
+    })
   }
 
   return (
     <div className={'card ' + cardType}>
       <FontAwesomeIcon className='page' icon={faAngleUp} onClick={handleAnterior} />
-      <div className='mis-favoritos' onClick={handleFavoritos}><span className='mis-favoritos-texto'>Mis favoritos</span> <FontAwesomeIcon className='favoritos' icon={faHeart} /></div>
+      <div className='mis-favoritos' onClick={() => onToggleFavorite()}><span className='mis-favoritos-texto'>Mis favoritos</span> <FontAwesomeIcon className='favoritos' icon={faHeart} /></div>
       <div className='pokemon-numero'>Pokemon nro {id}</div>
       <h3 className='pokemon-nombre'>{name}</h3>
       <div className='text-center'>

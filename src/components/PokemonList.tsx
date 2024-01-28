@@ -9,7 +9,7 @@ const PokemonList: React.FC = () => {
   useEffect(() => {
     // Llamada inicial a la API para obtener la lista de Pokémon
     // Puedes ajustar la URL de la API según tus necesidades
-    axios.get('https://pokeapi.co/api/v2/pokemon?limit=2')
+    axios.get('https://pokeapi.co/api/v2/pokemon?limit=10')
       .then(response => {
         const results = response.data.results;
         // Llenar la lista de Pokémon con datos básicos
@@ -18,7 +18,6 @@ const PokemonList: React.FC = () => {
           axios.get(item.url)
             .then(response => {
               const data = response.data;
-              console.log(data)
               const pokemon = {
                 id: data.id,
                 name: item.name,
@@ -43,7 +42,7 @@ const PokemonList: React.FC = () => {
   }, []);
 
   const handleToggleFavorite = (index: number) => {
-    // Implementar la lógica para agregar/eliminar Pokémon favorito
+    console.log(`Yo te elijo! ${index}`)
   };
 
   return (
