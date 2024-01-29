@@ -6,7 +6,8 @@ import PokemonCard from './PokemonCard';
 const PokemonList: React.FC = () => {
   const [pokemonList, setPokemonList] = useState<any[]>([]);
   const [favoritos, setFavoritos] = useState<any[]>([]);
-
+  console.log(favoritos)
+  
   useEffect(() => {
     // Llamada inicial a la API para obtener la lista de Pokémon
     // Puedes ajustar la URL de la API según tus necesidades

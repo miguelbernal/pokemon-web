@@ -61,6 +61,27 @@ const FavoriteList: React.FC = () => {
     console.log(`Yo te elijo! ${index}`)
   };
 
+  function handleEliminarFavorite(id: number){
+    let favoritos = localStorage.getItem("favoritos");
+    if(favoritos !== null){
+      let arrFavoritos:any[] = favoritos.split(',');
+      if(arrFavoritos.length === 0){
+        arrFavoritos.push(favoritos);
+      }
+      console.log(arrFavoritos)
+      let pos = 0;
+      arrFavoritos.forEach(element => {
+        if (parseInt(element) === (id-1)){
+          arrFavoritos.splice(pos,1);
+          localStorage.setItem("favoritos",arrFavoritos.toString());
+          console.log(`Eliminado ${element} = ${id - 1}`)
+        }
+        pos = pos+1
+      });
+      setPokemonList(arrFavoritos);
+    }
+  }
+
   return (
     <div className="favoritos-list">
       <div className='mis-favoritos-favorito'>
@@ -74,6 +95,7 @@ const FavoriteList: React.FC = () => {
           key={index}
           pokemonData={pokemon}
           onToggleFavorite={() => handleToggleFavorite(index)}
+          onEliminarFavorite={() => handleEliminarFavorite(pokemon.id)}
         />
       ))}
     </div>
