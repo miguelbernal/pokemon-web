@@ -32,8 +32,20 @@ const FavoriteList: React.FC = () => {
                 hp: data.stats[0].base_stat,
                 type: data.types[0].type.name
               }
-              updatedPokemonList.push(pokemon);
-              setPokemonList(updatedPokemonList);
+              let favoritos = localStorage.getItem("favoritos")
+              let isFavorito = false;
+              if(favoritos !== null){
+                let arrFavoritos = favoritos.split(',');
+                arrFavoritos.forEach(element => {
+                  if (parseInt(element) === pokemon.id-1){
+                    isFavorito = true;
+                  }
+                });
+              }
+              if(isFavorito){
+                updatedPokemonList.push(pokemon);
+                setPokemonList(updatedPokemonList);
+              }
             })
             .catch(error => {
               console.error('Error fetching Pokemon data only:', error);

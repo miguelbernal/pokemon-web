@@ -44,7 +44,13 @@ const PokemonList: React.FC = () => {
 
   const handleToggleFavorite = (index: number) => {
     console.log(`Yo te elijo! ${index}`)
-    let newFavoritos:any[] = [...favoritos, index]
+    let lsFavoritos = localStorage.getItem("favoritos")
+    console.log(lsFavoritos)
+    let lsf:any[] = [];
+    if(lsFavoritos !== null){
+      lsf = lsFavoritos.split(',');
+    }
+    let newFavoritos:any[] = [...lsf, index]
     setFavoritos(newFavoritos)
     console.log(newFavoritos)
     localStorage.setItem(`favoritos`, newFavoritos.toString())

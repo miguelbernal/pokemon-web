@@ -9,19 +9,19 @@ interface FavoritoCardProps {
   onToggleFavorite: () => void; // Manejar la acción de agregar/eliminar favorito
 }
 
-function handleRetornar(){
-
+function handleEliminar(){
+  console.log('eliminar')
 }
 
 const FavoritoCard: React.FC<FavoritoCardProps> = ({ pokemonData, onToggleFavorite }) => {
-  const { id, name, imageUrl, type } = pokemonData;
+  const { name, imageUrl, type } = pokemonData;
   const cardType = `card${type}`;
 
   return (
     <div className={'card-favorito ' + cardType}>
       <img className='pokemon-imagen-favorito' src={imageUrl} alt={name}/>
       <div className='pokemon-nombre-favorito'>{name}</div>
-      <FontAwesomeIcon className='eliminar' icon={faTrash} onClick={handleRetornar}/>
+      <FontAwesomeIcon className='eliminar' icon={faTrash} onClick={handleEliminar}/>
     </div>
   );
 };
