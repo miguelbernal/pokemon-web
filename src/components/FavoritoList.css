@@ -1,0 +1,19 @@
+.mis-favoritos-favorito{
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+    margin-top: 50px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-content: space-around;
+    align-items: center;
+}
+.mis-favoritos-texto-favorito{
+    color: black;
+    font-size: 32px;
+    text-align: right;
+    width: 90%;
+}
+.favoritos-retorno-favorito{
+    font-size: 32px;
+}

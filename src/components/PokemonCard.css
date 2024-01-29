@@ -10,16 +10,18 @@
     align-items: center;
     justify-content: flex-end;
     padding-top: 30px;
-    padding-right: 30px;
 }
 .mis-favoritos-texto{
     color: gainsboro;
+    margin-right: 15px;
 }
-.favoritos, .page{
+.mis-favoritos-icon{
     font-size: 32px;
-    margin-left: 15px;
+    margin-right: 40px;
 }
 .page{
+    font-size: 32px;
+    margin-left: 15px;
     color: rgba(255, 255, 255, .1);
     cursor: pointer;
 }

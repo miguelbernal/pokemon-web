@@ -1,11 +1,14 @@
 // src/components/PokemonList.tsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import PokemonCard from './PokemonCard';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import FavoritoCard from './FavoritoCard';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import './FavoritoList.css'
+import { Link } from 'react-router-dom';
 
-const PokemonList: React.FC = () => {
+const FavoriteList: React.FC = () => {
   const [pokemonList, setPokemonList] = useState<any[]>([]);
-  const [favoritos, setFavoritos] = useState<any[]>([]);
 
   useEffect(() => {
     // Llamada inicial a la API para obtener la lista de Pokémon
@@ -44,16 +47,18 @@ const PokemonList: React.FC = () => {
 
   const handleToggleFavorite = (index: number) => {
     console.log(`Yo te elijo! ${index}`)
-    let newFavoritos:any[] = [...favoritos, index]
-    setFavoritos(newFavoritos)
-    console.log(newFavoritos)
-    localStorage.setItem(`favoritos`, newFavoritos.toString())
   };
 
   return (
-    <div className="pokemon-list">
+    <div className="favoritos-list">
+      <div className='mis-favoritos-favorito'>
+        <Link to="/">
+          <FontAwesomeIcon className='favoritos-retorno-favorito' icon={faArrowLeft} /> 
+        </Link>
+        <div className='mis-favoritos-texto-favorito'>Mis favoritos</div>
+      </div>
       {pokemonList.map((pokemon, index) => (
-        <PokemonCard
+        <FavoritoCard
           key={index}
           pokemonData={pokemon}
           onToggleFavorite={() => handleToggleFavorite(index)}
@@ -63,4 +68,4 @@ const PokemonList: React.FC = () => {
   );
 };
 
-export default PokemonList;
+export default FavoriteList;

@@ -5,6 +5,7 @@ import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import './PokemonCard.css'
+import { Link } from 'react-router-dom';
 
 interface PokemonCardProps {
   pokemonData: any; // Datos del Pokemon
@@ -31,8 +32,11 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemonData, onToggleFavorite
 
   return (
     <div className={'card ' + cardType}>
-      <FontAwesomeIcon className='page' icon={faAngleUp} onClick={handleAnterior} />
-      <div className='mis-favoritos' onClick={() => onToggleFavorite()}><span className='mis-favoritos-texto'>Mis favoritos</span> <FontAwesomeIcon className='favoritos' icon={faHeart} /></div>
+      <FontAwesomeIcon className='page' icon={faAngleUp} onClick={handleAnterior}/>
+      <Link to="/favoritos">
+        <div className='mis-favoritos'><span className='mis-favoritos-texto'>Mis favoritos</span> 
+        <FontAwesomeIcon className='mis-favoritos-icon' icon={faHeart} /></div>
+      </Link>
       <div className='pokemon-numero'>Pokemon nro {id}</div>
       <h3 className='pokemon-nombre'>{name}</h3>
       <div className='text-center'>

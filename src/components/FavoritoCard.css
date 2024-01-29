@@ -1,0 +1,50 @@
+.card-favorito{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-content: space-around;
+    align-items: center;
+    gap: 5px;
+    color: white;
+    border-radius: 15px;
+    margin: 5px;
+    padding: 10px;
+    height: 100px;
+}
+.mis-favoritos-favorito{
+    margin: 5px;
+    margin-right: 15px;
+    width: 100%;
+    justify-content: flex-end;
+}
+.mis-favoritos-texto-favorito{
+    color: black;
+}
+.pokemon-nombre-favorito{
+    text-transform: capitalize;
+    width: 63%;
+    font-size: 32px;
+    font-weight: bold;
+}
+.pokemon-imagen-favorito{
+    width: 100px;
+}
+.eliminar{
+    font-size: 32px;
+}
+.cardfire{
+    background-color: red;
+}
+.cardnormal{
+    background-color: grey;
+}
+.cardwater{
+    background-color: blue;
+}
+.cardbug{
+    background-color: brown;
+}
+.cardgrass{
+    background-color: green;
+}
