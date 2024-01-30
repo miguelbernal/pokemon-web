@@ -7,40 +7,38 @@ const PokemonList: React.FC = () => {
   const [pokemonList, setPokemonList] = useState<any[]>([]);
   const [favoritos, setFavoritos] = useState<any[]>([]);
   console.log(favoritos)
-  
-  useEffect(() => {
+
+  const buscarPokemones = async () => {
     // Llamada inicial a la API para obtener la lista de Pokémon
     // Puedes ajustar la URL de la API según tus necesidades
-    axios.get('https://pokeapi.co/api/v2/pokemon?limit=10')
-      .then(response => {
-        const results = response.data.results;
-        // Llenar la lista de Pokémon con datos básicos
-        let updatedPokemonList:any = [];
-        for (let item of results) {
-          axios.get(item.url)
-            .then(response => {
-              const data = response.data;
-              const pokemon = {
-                id: data.id,
+    try {
+      const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=10')
+      const results = await response.data.results;
+      // Llenar la lista de Pokémon con datos básicos
+      let updatedPokemonList:any = [];
+      for (let item of results) {
+          const responseDetalle = await axios.get(item.url);
+          const dataDetalle = await responseDetalle.data;
+          const pokemon = {
+                id: dataDetalle.id,
                 name: item.name,
                 url: item.url,
-                imageUrl: data.sprites.other.home.front_default,
-                attack: data.stats[1].base_stat,
-                defense: data.stats[2].base_stat,
-                hp: data.stats[0].base_stat,
-                type: data.types[0].type.name
+                imageUrl: dataDetalle.sprites.other.home.front_default,
+                attack: dataDetalle.stats[1].base_stat,
+                defense: dataDetalle.stats[2].base_stat,
+                hp: dataDetalle.stats[0].base_stat,
+                type: dataDetalle.types[0].type.name
               }
-              updatedPokemonList.push(pokemon);
-              setPokemonList(updatedPokemonList);
-            })
-            .catch(error => {
-              console.error('Error fetching Pokemon data only:', error);
-            });
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching Pokemon data:', error);
-      });
+          updatedPokemonList.push(pokemon);
+      }
+      setPokemonList(updatedPokemonList);
+    } catch (error) {
+      console.error('Error fetching Pokemon data:', error);
+    }
+  }
+  
+  useEffect(() => {
+    buscarPokemones();
   }, []);
 
   const handleToggleFavorite = (index: number) => {

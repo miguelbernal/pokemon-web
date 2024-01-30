@@ -8,53 +8,50 @@ import './FavoritoList.css'
 import { Link } from 'react-router-dom';
 
 const FavoriteList: React.FC = () => {
-  const [pokemonList, setPokemonList] = useState<any[]>([]);
-
-  useEffect(() => {
+  const [pokemonFavoritoList, setPokemonFavoritoList] = useState<any[]>([]);
+  const buscarFavoritos = async () => {
     // Llamada inicial a la API para obtener la lista de Pokémon
     // Puedes ajustar la URL de la API según tus necesidades
-    axios.get('https://pokeapi.co/api/v2/pokemon?limit=10')
-      .then(response => {
-        const results = response.data.results;
-        // Llenar la lista de Pokémon con datos básicos
-        let updatedPokemonList:any = [];
-        for (let item of results) {
-          axios.get(item.url)
-            .then(response => {
-              const data = response.data;
-              const pokemon = {
-                id: data.id,
-                name: item.name,
-                url: item.url,
-                imageUrl: data.sprites.other.home.front_default,
-                attack: data.stats[1].base_stat,
-                defense: data.stats[2].base_stat,
-                hp: data.stats[0].base_stat,
-                type: data.types[0].type.name
+    try {
+      const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=10')
+      const results = response.data.results;
+      // Llenar la lista de Pokémon con datos básicos
+      let updatedPokemonList:any = [];
+      for (let item of results) {
+          const responseDetalle = await axios.get(item.url)
+          const data = responseDetalle.data;
+          const pokemon = {
+              id: data.id,
+              name: item.name,
+              url: item.url,
+              imageUrl: data.sprites.other.home.front_default,
+              attack: data.stats[1].base_stat,
+              defense: data.stats[2].base_stat,
+              hp: data.stats[0].base_stat,
+              type: data.types[0].type.name
+          }
+          let favoritos = localStorage.getItem("favoritos")
+          let isFavorito = false;
+          if(favoritos !== null){
+            let arrFavoritos = favoritos.split(',');
+            arrFavoritos.forEach(element => {
+              if (parseInt(element) === pokemon.id-1){
+                isFavorito = true;
               }
-              let favoritos = localStorage.getItem("favoritos")
-              let isFavorito = false;
-              if(favoritos !== null){
-                let arrFavoritos = favoritos.split(',');
-                arrFavoritos.forEach(element => {
-                  if (parseInt(element) === pokemon.id-1){
-                    isFavorito = true;
-                  }
-                });
-              }
-              if(isFavorito){
-                updatedPokemonList.push(pokemon);
-                setPokemonList(updatedPokemonList);
-              }
-            })
-            .catch(error => {
-              console.error('Error fetching Pokemon data only:', error);
             });
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching Pokemon data:', error);
-      });
+          }
+          if(isFavorito){
+            updatedPokemonList.push(pokemon);
+          }
+      }
+      setPokemonFavoritoList(updatedPokemonList);
+    } catch (error) {
+      console.error('Error fetching Pokemon data:', error);      
+    }
+  }
+    
+  useEffect(() => {
+    buscarFavoritos();
   }, []);
 
   const handleToggleFavorite = (index: number) => {
@@ -78,7 +75,7 @@ const FavoriteList: React.FC = () => {
         }
         pos = pos+1
       });
-      setPokemonList(arrFavoritos);
+      buscarFavoritos();
     }
   }
 
@@ -90,7 +87,7 @@ const FavoriteList: React.FC = () => {
         </Link>
         <div className='mis-favoritos-texto-favorito'>Mis favoritos</div>
       </div>
-      {pokemonList.map((pokemon, index) => (
+      {pokemonFavoritoList.map((pokemon, index) => (
         <FavoritoCard
           key={index}
           pokemonData={pokemon}
